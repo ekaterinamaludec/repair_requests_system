@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Новая заявка</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Создание заявки на ремонт</h1>
+        <form method="POST">
+            <label>Оборудование:</label><br>
+            <input type="text" name="equipment" required><br><br>
+
+            <label>Описание проблемы:</label><br>
+            <textarea name="problem" rows="4" cols="40" required></textarea><br><br>
+
+            <label>Заявитель (ФИО):</label><br>
+            <input type="text" name="requester" required><br><br>
+
+            <input type="submit" value="Отправить заявку">
+        </form>
+        <br>
+        <a href="/">На главную</a>
+    </div>
+</body>
+</html>

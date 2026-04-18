@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список заявок</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Все заявки на ремонт</h1>
+
+        {% if requests %}
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Оборудование</th>
+                    <th>Проблема</th>
+                    <th>Заявитель</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+                {% for req in requests %}
+                <tr>
+                    <td>{{ req.id }}</td>
+                    <td>{{ req.equipment }}</td>
+                    <td>{{ req.problem }}</td>
+                    <td>{{ req.requester }}</td>
+                    <td>{{ req.status }}</td>
+                    <td>
+                        {% if req.status == 'Новая' %}
+                            <a href="/update/{{ req.id }}/В работе" class="btn">В работу</a>
+                        {% elif req.status == 'В работе' %}
+                            <a href="/update/{{ req.id }}/Выполнена" class="btn">Выполнить</a>
+                        {% else %}
+                            <span>✓ Готово</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>Пока нет ни одной заявки.</p>
+        {% endif %}
+
+        <br>
+        <a href="/" class="btn">На главную</a>
+        <a href="/create" class="btn">Новая заявка</a>
+    </div>
+</body>
+</html>
